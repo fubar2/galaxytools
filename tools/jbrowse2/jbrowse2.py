@@ -1113,7 +1113,9 @@ class JbrowseConnector(object):
                     "make-pif",
                     fakeName,
                 ]
-                self.subprocess_check_call(cmd)
+                e = os.environ
+                e["SHELL"] = "/bin/sh"
+                subprocess.run(cmd, env=e, shell=True)
                 usePIF = True
             else:
                 dest = os.path.join(self.outdir, url)
